@@ -1,0 +1,11 @@
+/home/juleswhite/messenger-csharp/MessengerLibrary/bin/Debug/net8.0/MessengerLibrary.deps.json
+/home/juleswhite/messenger-csharp/MessengerLibrary/bin/Debug/net8.0/MessengerLibrary.dll
+/home/juleswhite/messenger-csharp/MessengerLibrary/bin/Debug/net8.0/MessengerLibrary.pdb
+/home/juleswhite/messenger-csharp/MessengerLibrary/obj/Debug/net8.0/MessengerLibrary.GeneratedMSBuildEditorConfig.editorconfig
+/home/juleswhite/messenger-csharp/MessengerLibrary/obj/Debug/net8.0/MessengerLibrary.AssemblyInfoInputs.cache
+/home/juleswhite/messenger-csharp/MessengerLibrary/obj/Debug/net8.0/MessengerLibrary.AssemblyInfo.cs
+/home/juleswhite/messenger-csharp/MessengerLibrary/obj/Debug/net8.0/MessengerLibrary.csproj.CoreCompileInputs.cache
+/home/juleswhite/messenger-csharp/MessengerLibrary/obj/Debug/net8.0/MessengerLibrary.dll
+/home/juleswhite/messenger-csharp/MessengerLibrary/obj/Debug/net8.0/refint/MessengerLibrary.dll
+/home/juleswhite/messenger-csharp/MessengerLibrary/obj/Debug/net8.0/MessengerLibrary.pdb
+/home/juleswhite/messenger-csharp/MessengerLibrary/obj/Debug/net8.0/ref/MessengerLibrary.dll

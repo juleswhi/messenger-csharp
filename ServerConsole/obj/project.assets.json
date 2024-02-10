@@ -1,0 +1,89 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "MessengerLibrary/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/MessengerLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MessengerLibrary.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MessengerLibrary/1.0.0": {
+      "type": "project",
+      "path": "../MessengerLibrary/MessengerLibrary.csproj",
+      "msbuildProject": "../MessengerLibrary/MessengerLibrary.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "MessengerLibrary >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "/home/juleswhite/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/juleswhite/messenger-csharp/ServerConsole/ServerConsole.csproj",
+      "projectName": "ServerConsole",
+      "projectPath": "/home/juleswhite/messenger-csharp/ServerConsole/ServerConsole.csproj",
+      "packagesPath": "/home/juleswhite/.nuget/packages/",
+      "outputPath": "/home/juleswhite/messenger-csharp/ServerConsole/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/juleswhite/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {
+            "/home/juleswhite/messenger-csharp/MessengerLibrary/MessengerLibrary.csproj": {
+              "projectPath": "/home/juleswhite/messenger-csharp/MessengerLibrary/MessengerLibrary.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/home/juleswhite/.dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
