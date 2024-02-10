@@ -4,7 +4,8 @@ namespace Messenger;
 public enum PacketRequestType {
     HANDSHAKE,
     MESSAGE,
-    CONFIRMATION
+    CONFIRMATION,
+    USERS
 }
 
 public class Packet {

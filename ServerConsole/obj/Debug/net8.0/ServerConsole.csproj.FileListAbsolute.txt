@@ -16,3 +16,4 @@
 /home/juleswhite/messenger-csharp/ServerConsole/obj/Debug/net8.0/ServerConsole.pdb
 /home/juleswhite/messenger-csharp/ServerConsole/obj/Debug/net8.0/ServerConsole.genruntimeconfig.cache
 /home/juleswhite/messenger-csharp/ServerConsole/obj/Debug/net8.0/ref/ServerConsole.dll
+/home/juleswhite/messenger-csharp/ServerConsole/obj/Debug/net8.0/ServerConsole.sourcelink.json

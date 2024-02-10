@@ -91,10 +91,51 @@ public class Client {
         }
     }
 
-    public void Send(string message) {
+    private List<string> RequestUsers() {
+        // Grab the stream rq
         NetworkStream stream = _client.GetStream();
 
-        byte[] packet = new Packet(Id, message){ RequestType = MESSAGE }.ToBytes();
+        // Create packet to request all connected users from the server
+        byte[] packet = new Packet(Id){ RequestType = USERS }.ToBytes();
+
+        // Send the packet to server
+        stream.Write(packet, 0, packet.Length);
+
+        // Create buffer for response
+        packet = new byte[256];
+
+        // Int represents the number of bytes in buffer
+        Int32 bytes = stream.Read(packet, 0, packet.Length);
+
+        // turn the bytes into a useable Packet
+        Packet response = Packet.FromString(System.Text.Encoding.ASCII.GetString(packet, 0, bytes));
+
+        // Incoming list of users is separated by a comma
+        string[] users = response.Data.Split(",");
+
+        // Return type is list not array
+        return users.ToList();
+    }
+
+    public void Send(string message, string? recipient = null) {
+
+        NetworkStream stream = _client.GetStream();
+
+        if(recipient is not null) {
+            // Find recipient
+            List<string> users = RequestUsers();
+
+            // Get rid of empty string due to trailing comma
+            users.Remove("");
+
+            if(!users.Contains(recipient)) {
+                // User not valid
+                Console.WriteLine($"Specified user could not be found."); 
+                return;
+            }
+        }
+
+        byte[] packet = new Packet(Id, message){ RequestType = MESSAGE, Recipient = recipient }.ToBytes();
 
         stream.Write(packet, 0, packet.Length);
     }

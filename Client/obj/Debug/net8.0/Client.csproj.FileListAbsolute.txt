@@ -16,3 +16,4 @@
 /home/juleswhite/messenger-csharp/Client/bin/Debug/net8.0/MessengerLibrary.pdb
 /home/juleswhite/messenger-csharp/Client/obj/Debug/net8.0/Client.csproj.AssemblyReference.cache
 /home/juleswhite/messenger-csharp/Client/obj/Debug/net8.0/Client.csproj.CopyComplete
+/home/juleswhite/messenger-csharp/Client/obj/Debug/net8.0/Client.sourcelink.json

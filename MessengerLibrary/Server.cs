@@ -9,9 +9,8 @@ public class Server {
     private static TcpListener? listener = null;
     private static readonly string _defaultIp = @"127.0.0.1"; 
 
-    private List<NetworkStream> _clientStreams = new();
-
     private Dictionary<Guid, string> GuidToNicknameMap = new ();
+    private Dictionary<Guid, NetworkStream> GuidToStreamMap = new ();
 
     public void Run(string? ip = null, int port = 6969) {
         ip ??= _defaultIp;
@@ -45,8 +44,6 @@ public class Server {
 
         NetworkStream stream = client.GetStream();
 
-        _clientStreams.Add(stream);
-
         int i;
 
         while((i = stream.Read(bytes, 0, bytes.Length)) != 0) {
@@ -59,6 +56,8 @@ public class Server {
 
             Packet packet = Packet.FromString(data!);
 
+            GuidToStreamMap[packet.Sender] = stream;
+
             if(packet.RequestType == PacketRequestType.HANDSHAKE) {
                 Console.WriteLine($"{packet.Data} joined.");
                 // Add kvp to dict
@@ -70,17 +69,45 @@ public class Server {
                 stream.Write(confirmationPacket, 0, confirmationPacket.Length);
             }
 
+            // Return a list of all nicknames
+            else if(packet.RequestType == PacketRequestType.USERS) {
+                // nicknames separated by ','
+                string users = "";
+                foreach(var (_, val) in GuidToNicknameMap) {
+                    users += $"{val},";
+                }
+
+                byte[] nicknamePacket = new Packet(packet.Sender, users){ RequestType = PacketRequestType.USERS }.ToBytes();
+
+                stream.Write(nicknamePacket, 0, nicknamePacket.Length);
+            }
+
             else if(packet.RequestType == PacketRequestType.MESSAGE) {
 
                 // Send packet to all others clients
 
-                byte[] outgoingPacket = new Packet(packet.Sender, $"{GuidToNicknameMap[packet.Sender]}: {packet.Data}"){ RequestType = MESSAGE }.ToBytes();
-                foreach(var clientStream in _clientStreams) {
-                    clientStream.Write(outgoingPacket, 0, outgoingPacket.Length);
+                if(!string.IsNullOrEmpty(packet.Recipient)) {
+                    // Grab the network stream of the recipient
+                    NetworkStream recipientStream = GuidToStreamMap[
+                        // Search for the nickname 
+                        // Grab the correspinding guid
+                        GuidToNicknameMap.FirstOrDefault(x => x.Value == packet.Recipient).Key
+                    ];
+
+                    byte[] recipientPacket = packet.ToBytes();
+                    recipientStream.Write(recipientPacket, 0, recipientPacket.Length);
+                    Console.WriteLine($"{GuidToNicknameMap[packet.Sender]} TO {packet.Recipient}: {packet.Data}");
+                }
+
+                else {
+                    byte[] outgoingPacket = new Packet(packet.Sender, $"{GuidToNicknameMap[packet.Sender]}: {packet.Data}"){ RequestType = MESSAGE }.ToBytes();
+                    foreach(var (_, clientStream)  in GuidToStreamMap) {
+                        clientStream.Write(outgoingPacket, 0, outgoingPacket.Length);
+                    }
+                    Console.WriteLine($"{GuidToNicknameMap[packet.Sender]}: {packet.Data}");
                 }
 
 
-                Console.WriteLine($"{GuidToNicknameMap[packet.Sender]}: {packet.Data}");
             }
         }
     }
